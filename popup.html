@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>我是弹出子窗口</h2>
+    <button id="popbtn">向父窗口传递信息</button>
+</body>
+<script>
+    var popbtn=this.document.querySelector('#popbtn')
+    popbtn.onclick=(e)=>{
+        window.opener.postMessage('子窗口的信息')
+    }
+</script>
+</html>
