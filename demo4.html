@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="openBtn">打开图片</button>
+    <button id="saveBtn">保存文件</button>
+    <button id="messageBtn">弹出对话框</button>
+    <img id="images" style="width: 100%">
+</body>
+<script>
+    const {dialog} = require('electron').remote
+    const fs= require('fs')
+    let openBtn = document.getElementById('openBtn');
+    openBtn.onclick = async function () {
+        let rs = await dialog.showOpenDialog({
+            title: '请选择你喜欢的照片',
+            buttonLabel: '打开图片',
+            filters: [
+                { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+            ]
+        }).catch(err=>{
+            console.log(err)
+        })
+        console.log(rs)
+        let image = document.getElementById('images')
+        image.setAttribute('src',rs.filePaths[0])
+    }
+
+    let saveBtn=document.getElementById('saveBtn')
+    saveBtn.onclick=async ()=>{
+        let rs = await dialog.showSaveDialog({
+            title:'保存文件'
+        }).catch((err)=>{console.log(err)})
+        console.log(rs)
+        fs.writeFileSync(rs.filePath,'11111')
+    }
+
+    let messageBtn=document.getElementById('messageBtn')
+    messageBtn.onclick=async ()=>{
+        let rs = await dialog.showMessageBox({
+            type:'warning',
+            title:'去不去由你',
+            message:'是不是要跟胖哥去红袖招?',
+            buttons:['我要去','不去了']
+        }).catch((err)=>{console.log(err)})
+        console.log(rs)
+    }
+</script>
+</html>

@@ -10,7 +10,7 @@ app.on('ready',()=>{
             webPreferences:{ nodeIntegration:true}
         })   //设置打开的窗口大小
     mainWindow.webContents.openDevTools()
-    mainWindow.loadFile('demo3.html')  //加载那个页面
+    mainWindow.loadFile('demo5.html')  //加载那个页面
 
     // var view = new BrowserView()   //new出对象
     // mainWindow.setBrowserView(view)   // 在主窗口中设置view可用
